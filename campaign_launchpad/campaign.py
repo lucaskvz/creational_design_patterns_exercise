@@ -18,65 +18,37 @@ class Campaign:
 
 class CampaignBuilder:
     def __init__(self):
-        self._name = None
-        self._channel = None
-        self._daily_budget = None
-        self._start_date = None
-        self._end_date = None
-        self._audience = {}
-        self._creatives = []
-        self._tracking = {}
+      # TODO
+      pass
 
     def with_name(self, name: str):
-        self._name = name
-        return self
+      # TODO
+      pass
 
     def with_channel(self, channel: str):
-        self._channel = channel
-        return self
+      # TODO
+      pass
 
     def with_budget(self, daily_budget: float):
-        self._daily_budget = daily_budget
-        return self
+      # TODO
+      pass
 
     def with_dates(self, start_date, end_date=None):
-        self._start_date = start_date
-        self._end_date = end_date
-        return self
+      # TODO
+      pass
 
     def with_audience(self, **kwargs):
-        self._audience.update(kwargs)
-        return self
+      # TODO
+      pass
 
     def add_creative(self, headline: str, image_url: str):
-        self._creatives.append({"headline": headline, "image_url": image_url})
-        return self
+      # TODO
+      pass
 
     def with_tracking(self, **kwargs):
-        self._tracking.update(kwargs)
-        return self
+      # TODO
+      pass
 
     def build(self) -> Campaign:
-        if not self._name:
-            raise ValueError("Campaign must have a name")
-        if not self._channel:
-            raise ValueError("Campaign must have a channel")
-        if self._daily_budget is None or self._daily_budget <= 0:
-            raise ValueError("Budget must be positive")
-        if self._start_date is None:
-            raise ValueError("Start date is required")
-        if self._end_date and self._start_date > self._end_date:
-            raise ValueError("Start date must be before or equal to end date")
-        if not self._creatives:
-            raise ValueError("At least one creative is required")
-
-        return Campaign(
-            name=self._name,
-            channel=self._channel,
-            daily_budget=self._daily_budget,
-            start_date=self._start_date,
-            end_date=self._end_date,
-            target_audience=self._audience,
-            creatives=self._creatives,
-            tracking=self._tracking,
-        )
+      # TODO: Validations and return Campaign instance
+      pass
