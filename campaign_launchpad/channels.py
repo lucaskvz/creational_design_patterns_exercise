@@ -1,4 +1,3 @@
-
 from abc import ABC, abstractmethod
 from uuid import uuid4
 from .budget import GlobalBudget
@@ -11,7 +10,7 @@ class ChannelClient(ABC):
 
     @abstractmethod
     def create_campaign(self, campaign: Campaign) -> str:
-        # TODO: Create a campaign on this channel and return an external id.
+        # Create a campaign and return an external id
         pass
 
     @abstractmethod
@@ -20,15 +19,37 @@ class ChannelClient(ABC):
 
 
 class GoogleAdsClient(ChannelClient):
-  # TODO: Implement the Google Ads specific logic here.
-  pass
+    def __init__(self):
+        super().__init__("google")
+
+    def create_campaign(self, campaign: Campaign) -> str:
+        # Allocate the daily budget from the global shared budget
+        GlobalBudget().allocate(campaign.daily_budget)
+        # Return a prefixed id with 'g-'
+        return f"g-{uuid4().hex[:8]}"
+
+    def pause_campaign(self, campaign_id: str) -> None:
+        return None
+
 
 class FacebookAdsClient(ChannelClient):
-  # TODO: Implement the Facebook Ads specific logic here.
-  pass
+    def __init__(self):
+        super().__init__("facebook")
+
+    def create_campaign(self, campaign: Campaign) -> str:
+        GlobalBudget().allocate(campaign.daily_budget)
+        return f"f-{uuid4().hex[:8]}"
+
+    def pause_campaign(self, campaign_id: str) -> None:
+        return None
+
 
 class ChannelClientFactory:
     @staticmethod
     def create(channel: str) -> ChannelClient:
-      # TODO: Return the appropriate client based on the channel.
-      pass
+        ch = (channel or "").lower()
+        if ch == "google":
+            return GoogleAdsClient()
+        if ch == "facebook":
+            return FacebookAdsClient()
+        raise ValueError(f"Unknown channel: {channel}")
