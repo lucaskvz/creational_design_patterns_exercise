@@ -6,7 +6,7 @@ from typing import Optional, Dict, Any, List
 @dataclass(frozen=True)
 class Campaign:
     # I use a frozen dataclass so once a campaign is created, it's immutable.
-    # This guarantees tests can't mutate fields (they should raise on assignment).
+    # This guarantees tests can't mutate fields they should raise on assignment.
     name: str
     channel: str
     daily_budget: float
@@ -30,7 +30,7 @@ class CampaignBuilder:
         self._tracking: Dict[str, str] = {}
 
     def with_name(self, name: str):
-        # I return self from each "with_*" method to enable fluent chaining.
+        # I return self from each with_* method to enable fluent chaining.
         self._name = name
         return self
 
